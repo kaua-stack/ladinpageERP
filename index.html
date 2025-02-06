@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Micro SaaS - Transforme sua Gestão Empresarial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5a623;
+            --accent-color: #6c5ce7;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --light-text-color: #666;
+            --border-radius: 10px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        header a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        header a:hover {
+            color: var(--primary-color);
+        }
+        header ul {
+            display: flex;
+            list-style: none;
+        }
+        header li {
+            margin-left: 30px;
+        }
+        header .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        section {
+            padding: 100px 0;
+        }
+        h1, h2, h3 {
+            margin-bottom: 20px;
+        }
+        #showcase {
+            background: linear-gradient(135deg, var(--primary-color), #74b9ff);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+        }
+        #showcase h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        #showcase p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn:hover {
+            background: #e69514;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .box, .plan {
+            flex-basis: calc(33.333% - 20px);
+            background: #fff;
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .box:hover, .plan:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .box h3, .plan h3 {
+            color: var(--primary-color);
+        }
+        .plan {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .plan::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-color);
+        }
+        .plan.popular::before {
+            background: var(--secondary-color);
+        }
+        .plan h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .plan .price {
+            font-size: 36px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        .plan ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        .plan ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .plan .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        #testimonials {
+            background: #fff;
+        }
+        .testimonial {
+            text-align: center;
+            padding: 20px;
+        }
+        .testimonial img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid var(--primary-color);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #loginForm input[type="email"], #loginForm input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            transition: border-color 0.3s ease;
+        }
+        #loginForm input[type="email"]:focus, #loginForm input[type="password"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        #loginForm input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: background 0.3s ease;
+        }
+        #loginForm input[type="submit"]:hover {
+            background: #3a7bd5;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--light-text-color);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        @media(max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            header ul {
+                margin-top: 20px;
+            }
+            header li {
+                margin: 0 10px;
+            }
+            .flex-container {
+                flex-direction: column;
+            }
+            .box, .plan {
+                flex-basis: 100%;
+            }
+            #showcase h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">ERP Micro SaaS</a>
+            <nav>
+                <ul>
+                    <li><a href="#showcase">Início</a></li>
+                    <li><a href="#benefits">Benefícios</a></li>
+                    <li><a href="#features">Recursos</a></li>
+                    <li><a href="#plans">Planos</a></li>
+                    <li><a href="#" id="loginBtn">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Revolucione sua Gestão Empresarial</h1>
+            <p>Solução ERP completa e intuitiva para pequenas e médias empresas</p>
+            <a href="#plans" class="btn">Comece sua Transformação Agora</a>
+        </div>
+    </section>
+
+    <section id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>Por que Escolher Nosso ERP?</h2>
+                <p>Descubra como podemos impulsionar o crescimento do seu negócio</p>
+            </div>
+            <div class="flex-container">
+                <div class="box">
+                    <div class="feature-icon">📊</div>
+                    <h3>Gestão Financeira Avançada</h3>
+                    <p>Controle total das suas finanças com relatórios detalhados, fluxo de caixa em tempo real e previsões financeiras precisas. Tome decisões informadas e maximize seus lucros.</p>
+                </div>
+                <div class="box">
+                    <div class="feature-icon">📦</div>
+                    <h3>Controle de Estoque Inteligente</h3>
+                    <p>Gerencie seu inventário com eficiência, utilizando análises preditivas para otimizar compras e evitar perdas. Mantenha o equilíbrio perfeito entre oferta e demanda.</p>
+                </div>
+                <div class="box">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Vendas e CRM Integrados</h3>
+                    <p>Acompanhe suas vendas, gerencie leads e mantenha um relacionamento próximo com seus clientes em uma única plataforma. Aumente suas conversões e fidelização.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Recursos Exclusivos</h2>
+                <p>Ferramentas poderosas para impulsionar sua produtividade</p>
+            </div>
+            <div class="flex-container">
+                <div class="box">
+                    <div class="feature-icon">📈</div>
+                    <h3>Dashboards Personalizáveis</h3>
+                    <p>Crie painéis de controle adaptados às necessidades específicas do seu negócio, com métricas e KPIs relevantes. Visualize o desempenho da sua empresa em tempo real.</p>
+                </div>
+                <div class="box">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Integração com E-commerce</h3>
+                    <p>Sincronize facilmente seu ERP com as principais plataformas de e-commerce, mantendo seu estoque e pedidos atualizados. Expanda seus canais de venda sem complicações.</p>
+                </div>
+                <div class="box">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Automação de Processos</h3>
+                    <p>Economize tempo e reduza erros com fluxos de trabalho automatizados para tarefas repetitivas e aprovações. Aumente a eficiência operacional da sua empresa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans">
+        <div class="container">
+            <div class="section-header">
+                <h2>Escolha o Plano Ideal para Seu Negócio</h2>
+                <p>Soluções flexíveis que crescem com você</p>
+            </div>
+            <div class="flex-container">
+                <div class="plan">
+                    <h3>Básico</h3>
+                    <div class="price">R$ 99/mês</div>
+                    <ul>
+                        <li>Gestão Financeira Essencial</li>
+                        <li>Controle de Estoque Básico</li>
+                        <li>Emissão de Notas Fiscais</li>
+                        <li>Relatórios Simples</li>
+                        <li>Suporte por E-mail</li>
+                        <li>1 Usuário</li>
+                    </ul>
+                    <p>Ideal para microempreendedores e startups em fase inicial.</p>
+                    <a href="#" class="btn">Escolher Plano</a>
+                </div>
+                <div class="plan popular">
+                    <h3>Profissional</h3>
+                    <div class="price">R$ 199/mês</div>
+                    <ul>
+                        <li>Tudo do Plano Básico</li>
+                        <li>Gestão Financeira Avançada</li>
+                        <li>Controle de Estoque Inteligente</li>
+                        <li>Vendas e CRM Integrados</li>
+                        <li>Dashboards Personalizáveis</li>
+                        <li>Suporte Prioritário</li>
+                        <li>5 Usuários</li>
+                    </ul>
+                    <p>Perfeito para pequenas e médias empresas em crescimento.</p>
+                    <a href="#" class="btn">Escolher Plano</a>
+                </div>
+                <div class="plan">
+                    <h3>Empresarial</h3>
+                    <div class="price">R$ 299/mês</div>
+                    <ul>
+                        <li>Tudo do Plano Profissional</li>
+                        <li>Recursos Personalizados</li>
+                        <li>Integração com E-commerce</li>
+                        <li>Automação de Processos Avançada</li>
+                        <li>Business Intelligence</li>
+                        <li>Treinamento Dedicado</li>
+                        <li>Usuários Ilimitados</li>
+                    </ul>
+                    <p>Ideal para empresas de médio porte com necessidades complexas.</p>
+                    <a href="#" class="btn">Escolher Plano</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <h2>Por que Escolher Nosso ERP?</h2>
+                <p>Descubra como podemos transformar sua gestão empresarial</p>
+            </div>
+            <div class="flex-container">
+                <div class="box">
+                    <h3>Aumente sua Produtividade</h3>
+                    <p>Com processos automatizados e integrados, sua equipe pode focar no que realmente importa: o crescimento do seu negócio.</p>
+                </div>
+                <div class="box">
+                    <h3>Tome Decisões Informadas</h3>
+                    <p>Acesse dados em tempo real e relatórios detalhados para tomar decisões estratégicas com confiança.</p>
+                </div>
+                <div class="box">
+                    <h3>Cresça sem Complicações</h3>
+                    <p>Nossa solução escala com seu negócio, oferecendo flexibilidade para adicionar novos recursos conforme sua empresa cresce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>O que nossos clientes dizem</h2>
+                <p>Histórias reais de sucesso com nosso ERP</p>
+            </div>
+            <div class="flex-container">
+                <div class="testimonial">
+                    <img src="https://i.pravatar.cc/150?img=1" alt="Cliente 1">
+                    <p>"O ERP Micro SaaS transformou completamente a maneira como gerenciamos nossa empresa. A eficiência aumentou significativamente!"</p>
+                    <h4>Maria Silva</h4>
+                    <p>CEO, TechSolutions</p>
+                </div>
+                <div class="testimonial">
+                    <img src="https://i.pravatar.cc/150?img=2" alt="Cliente 2">
+                    <p>"Impressionante como é fácil de usar. Mesmo sem experiência em TI, conseguimos implementar e ver resultados rapidamente."</p>
+                    <h4>João Santos</h4>
+                    <p>Gerente, Comércio Rápido</p>
+                </div>
+                <div class="testimonial">
+                    <img src="https://i.pravatar.cc/150?img=3" alt="Cliente 3">
+                    <p>"O suporte ao cliente é excepcional. Sempre que precisamos de ajuda, a equipe está pronta para nos atender."</p>
+                    <h4>Ana Oliveira</h4>
+                    <p>Diretora Financeira, Inovação S.A.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>ERP Micro SaaS &copy; 2025 - Transformando a gestão de pequenas e médias empresas</p>
+    </footer>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Acesse sua conta</h2>
+            <form id="loginForm">
+                <input type="email" placeholder="Seu e-mail" required>
+                <input type="password" placeholder="Sua senha" required>
+                <input type="submit" value="Entrar">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal de Login
+        var modal = document.getElementById("loginModal");
+        var btn = document.getElementById("loginBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Formulário de Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login realizado com sucesso!');
+        });
+
+        // Rolagem suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
